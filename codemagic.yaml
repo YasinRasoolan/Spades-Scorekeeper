@@ -1,12 +1,17 @@
 workflows:
-  android-build:
-    name: Android Build
-    max_build_duration: 30
+  build_apk:
+    name: Build APK
+    max_build_duration: 60
     environment:
-      sdk: 34
-      java: 17
+      flutter: none
+      vars:
+        ANDROID_KEYSTORE_BASE64: ""
+        ANDROID_KEYSTORE_PASSWORD: ""
+        ANDROID_KEY_PASSWORD: ""
+        ANDROID_KEY_ALIAS: ""
     scripts:
-      - name: Build APK
-        script: ./gradlew assembleDebug
+      - name: Build Android APK
+        script: |
+          ./gradlew assembleDebug
     artifacts:
-      - app/build/outputs/**/*.apk
+      - app/build/outputs/apk/debug/app-debug.apk
